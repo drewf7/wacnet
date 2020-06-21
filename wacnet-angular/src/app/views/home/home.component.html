@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-xl-12">
+            <h1>Station List:</h1>
+            <hr>
+            <div *ngIf="sites; else loading">
+                <ng-container *ngFor="let site of sites">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div>
+                                    <h4>{{site.stationName}} <span *ngIf="site.lastUpdated" style="color: grey;">(Last Updated: {{site.lastUpdated}})</span></h4>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary" [routerLink]="['graph', site.siteId]">Graph Station</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </ng-container>
+            </div>
+            <ng-template #loading>
+                <div class="d-flex flex-row justify-content-center">
+                    <img style="height:250px;" src="assets/img/loading.svg">
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

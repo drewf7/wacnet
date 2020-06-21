@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-inline" [formGroup]="dateForm" (submit)="onSubmit()">
+        <div class="input-group flex-fill">
+            <input type="text" class="form-control" placeholder="Datepicker" bsDaterangepicker formControlName="dateRange" [maxDate]="maxDate"
+            [bsConfig]="{ adaptivePosition: true }"/>
+            <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+      

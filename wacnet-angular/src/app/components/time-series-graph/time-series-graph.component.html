@@ -1,0 +1,30 @@
+<div class="card animated fadeIn">
+    <div class="card-header">
+        <div class="row align-items-center">
+        <div class="col-sm-12 col-lg-12 col-xl-4">
+            <h2>{{ graphTitle }}</h2>
+        </div>
+        <ng-container *ngIf="!configurationOptions.hideDatePicker">
+            <div class="col-sm-12 col-lg-6 col-xl">
+            <app-date-picker-component [dates]="dates" (datesUpdated)="onDatesUpdated($event)"></app-date-picker-component>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="quickZoomButtons || !configurationOptions.hideFilterButtons">
+            <div class="col-sm-12 col-lg-6 col-xl-3">
+            <div class="d-flex flex-column align-items-center">
+                <h5 class="m-0">Quick zoom</h5>
+                <div class="d-flex flex-row my-2">
+                <button *ngFor="let quickZoomButton of quickZoomButtons; let i = index" type="button" class="btn btn-primary m-1"
+                (click)="quickZoomSelected(quickZoomButton.value, i)" [class.active]="activeQuickZoomButton === i">{{ quickZoomButton.text }}</button>
+                </div>
+                <h5 class="m-0">{{ quickZoomButtons[0].title }}</h5>
+            </div>
+            </div>
+        </ng-container>
+        </div>
+    </div>
+    <div class="card-body">
+        <div [id]="graphId" style="width: 100%; height: 500px"></div>
+    </div>
+</div>
+      
