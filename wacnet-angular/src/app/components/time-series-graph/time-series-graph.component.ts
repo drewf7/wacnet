@@ -112,7 +112,9 @@ export class TimeSeriesGraphComponent implements AfterViewInit, OnDestroy, OnIni
 
   ngOnInit() {
     if (this.configurationOptions.hideLastUpdated === undefined || !this.configurationOptions.hideLastUpdated) {
-      this.updateLastUpdated(this.dataset.data[this.dataset.data.length - 1]['timestamp']);
+      if (this.dataset.data && this.dataset.data[this.dataset.data.length - 1] && this.dataset.data[this.dataset.data.length - 1]['timestamp']) {
+        this.updateLastUpdated(this.dataset.data[this.dataset.data.length - 1]['timestamp']);
+      }
     }
   }
 
@@ -154,6 +156,11 @@ export class TimeSeriesGraphComponent implements AfterViewInit, OnDestroy, OnIni
         if (this.dataset.sharedAxis) {
           this.updateSharedValueAxisTitle(this.dataset.sharedAxisTitle);
         }
+      }
+
+      // If we had no data in our old set, we need to fully rebuild the graph
+      if (changes.dataset.previousValue && changes.dataset.previousValue.data && changes.dataset.previousValue.data.length === 0) {
+        this.zone.runOutsideAngular(() => this.createChart());
       }
     }
   }
